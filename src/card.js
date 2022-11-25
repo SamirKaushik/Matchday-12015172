@@ -3,8 +3,6 @@ const logo="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/da00ca61
 const crown="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/08f830ae-ce65-42f5-b243-b7a3f8a15b5f/crown.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221125%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221125T214650Z&X-Amz-Expires=86400&X-Amz-Signature=6d982673590940c926841b6482016183bd27db17e16d1b4678ffdf2d0c7b693b&X-Amz-SignedHeaders=host&x-id=GetObject";
 
 const Card = ({round, scores, player1, player2, winner }) => {
-
-
     return (<>
         <div className="card">
             <div className="card_head">
