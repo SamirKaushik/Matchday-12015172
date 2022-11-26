@@ -87,7 +87,7 @@ const Screen1 = () => {
     return (
         <>
             <h1>First Screen</h1>
-            <div style={{padding:"20px 20px"}}>
+            <div style={{padding:"0px 20px"}}>
             <div id="screen1_title">International Matches</div>
             <div style={{display:"flex", justifyContent:"flex-end"}}><input type="search" name="search" id="search" placeholder="Search for Matches" /></div>
             <div className="matches">
