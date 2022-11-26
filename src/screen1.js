@@ -58,8 +58,8 @@ const Screen1 = () => {
     //code for infinite scroller
     useEffect(() => {
         window.addEventListener('scroll', () => {
-            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-                if (pageNumber !== 0 && pageNumber < 9) {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                if (pageNumber < 9) {
                     setLoading(true)
                     setPageNumber((num) => num + 1)
                     setPages([...pages, data[pageNumber]]);
@@ -74,7 +74,7 @@ const Screen1 = () => {
             <div id="screen1_title">International Matches</div>
             <div><input type="search" name="search" id="search" placeholder="Search for Matches" /></div>
             <div className="matches">
-                {() => {
+                {/* {() => {
                     for (var i = 0; i <= pageNumber; i++) {
                         for (var j = 0; j < pages[pageNumber].fixtures.length; j++) {
                             const x = pages[i].fixtures[j];
@@ -87,7 +87,21 @@ const Screen1 = () => {
                             </Link>
                         }
                     }
-                }}
+                }} */}
+
+                {
+                    pages.map((page) => {
+                        return page.fixtures.map((x) => {
+                            const score_array = [];
+                            if (x.a1 !== 0) score_array.push(x.a1 + "-" + x.b1);
+                            if (x.a2 !== 0) score_array.push(", " + x.a2 + "-" + x.b2);
+                            if (x.a3 !== 0) score_array.push(", " + x.a3 + "-" + x.b3);
+                            return <Link to="/screen2" style={{ textDecoration: 'none', width:'0px' }}>
+                                <Card round={x.round} scores={score_array} player1={x.team1[0].name} player2={x.team2[0].name} winner={x.winner} />
+                            </Link>
+                        })
+                    })
+                }
             </div>
             {loading && <div className="loading">Loading...</div>}
             {error && <div className="error">Error</div>}
