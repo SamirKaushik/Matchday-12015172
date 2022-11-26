@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import Card from "./card";
 import data from "./data";
+import './screen1.css'
 const Screen1 = () => {
     const [pageNumber, setPageNumber] = useState(0);
     var url = "https://matchday.ai/referee/champ/fixture/dummy-matches?page=0";
@@ -71,8 +72,9 @@ const Screen1 = () => {
     return (
         <>
             <h1>First Screen</h1>
+            <div style={{padding:"20px 20px"}}>
             <div id="screen1_title">International Matches</div>
-            <div><input type="search" name="search" id="search" placeholder="Search for Matches" /></div>
+            <div style={{display:"flex", justifyContent:"flex-end"}}><input type="search" name="search" id="search" placeholder="Search for Matches" /></div>
             <div className="matches">
                 {/* {() => {
                     for (var i = 0; i <= pageNumber; i++) {
@@ -96,7 +98,7 @@ const Screen1 = () => {
                             if (x.a1 !== 0) score_array.push(x.a1 + "-" + x.b1);
                             if (x.a2 !== 0) score_array.push(", " + x.a2 + "-" + x.b2);
                             if (x.a3 !== 0) score_array.push(", " + x.a3 + "-" + x.b3);
-                            return <Link to="/screen2" style={{ textDecoration: 'none', width:'0px' }}>
+                            return <Link to="/screen2" style={{ textDecoration: 'none' }}>
                                 <Card round={x.round} scores={score_array} player1={x.team1[0].name} player2={x.team2[0].name} winner={x.winner} />
                             </Link>
                         })
@@ -105,6 +107,7 @@ const Screen1 = () => {
             </div>
             {loading && <div className="loading">Loading...</div>}
             {error && <div className="error">Error</div>}
+            </div>
         </>
     );
 }
