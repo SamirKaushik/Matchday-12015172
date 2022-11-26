@@ -8,7 +8,7 @@ const Card = ({round, scores, player1, player2, winner }) => {
             <div className="card_head">
                 <div className="card_head_1">All India Senior Ranking Badminton</div>
                 <div className="card_head_2">Tournament</div>
-                <div className="card_head_3">Final</div>
+                <div className="card_head_3">{round}</div>
             </div>
             <div className="match_info">
                 <div className="player_1">{player1}</div>
