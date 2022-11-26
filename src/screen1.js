@@ -8,6 +8,7 @@ const Screen1 = () => {
     const [pageNumber, setPageNumber] = useState(0);
     var url = "https://matchday.ai/referee/champ/fixture/dummy-matches?page=0";
     const [pages, setPages] = useState([]);
+    const [loadedPages,setLoadedPages]=useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -31,6 +32,7 @@ const Screen1 = () => {
     useEffect(() => {
         setLoading(true)
         setPages([data[0]]);
+        setLoadedPages([pages]);
         setLoading(false);
     }, []);
 
@@ -64,11 +66,24 @@ const Screen1 = () => {
                     setLoading(true)
                     setPageNumber((num) => num + 1)
                     setPages([...pages, data[pageNumber]]);
+                    setLoadedPages(pages);
                     setLoading(false);
                 }
             }
         })
     }, []);
+    // searching and filtering
+
+    const filter=(value)=>{
+        // if(value==="") setPages(loadedPages);
+        // const newPages=loadedPages.filter((page)=>page.fixtures[0].team1[0].name.toLowerCase().includes(value.toLowerCase())||page.fixtures[0].team2[0].name.toLowerCase().includes(value.toLowerCase())||page.fixtures[0].tournament[0].name.toLowerCase().includes(value.toLowerCase()));
+        // setPages(newPages);
+    }
+    const searchbar = document.getElementById("search");
+    if (searchbar)
+        searchbar.addEventListener('input', () => {
+            filter(searchbar.value);
+        })
     return (
         <>
             <h1>First Screen</h1>
