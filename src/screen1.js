@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from 'react';
 import { Link } from "react-router-dom";
 import Card from "./card";
 const Screen1 = () => {
@@ -24,7 +25,7 @@ const Screen1 = () => {
     useEffect(() => {
         window.addEventListener('scroll', () => {
             if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-                if (pageNumber != 0 && pageNumber < 9) {
+                if (pageNumber !== 0 && pageNumber < 9) {
                     setLoading(true)
                     setError(null)
                     setPageNumber((num) => num + 1)
