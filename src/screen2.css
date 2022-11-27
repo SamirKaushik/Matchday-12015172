@@ -26,3 +26,16 @@ h1{
     display: flex;
     justify-content: center;
 }
+#button-control{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.button{
+    margin:10px;
+    padding:5px 10px;
+    color: rgb(80,85,113);
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
