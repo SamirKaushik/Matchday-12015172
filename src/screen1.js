@@ -6,22 +6,33 @@ import data from "./data";
 import './screen1.css'
 import InfiniteScroll from "react-infinite-scroll-component"
 const Screen1 = () => {
-    var pageNumber = 0;
-    var url = "https://matchday.ai/referee/champ/fixture/dummy-matches?page=0";
+    // var url = "https://matchday.ai/referee/champ/fixture/dummy-matches?page=0"; this has been used to get all the data and stored itcin data.js file
     const [pages, setPages] = useState([]);
-    const [loadedPages, setLoadedPages] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [loadedPages,setLoadedPages]=useState([]);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
+    //getting first page using API but the API isn't working and giving CORS errors so I'm using data from file
+    //I've still written the code
+    // useEffect(() => {
+    //     setLoading(true)
+    //     setError(null)
+    //     fetch("https://matchday.ai/referee/champ/fixture/dummy-matches?page=0/allow-cors", { mode: 'cors', credentials: 'include' }).then(response => {
+    //         if (response.ok)
+    //             return response.json();
+    //         throw response;
+    //     }).then(data => {
+    //         setPages([data]);
+    //         setLoading(false);
+    //     }).catch(error => { setError(error) })
+    // }, []);
 
     //getting first page
     useEffect(() => {
-        setLoading(true)
         setTimeout(() => {
             setPages([data[0]]);
-            setLoadedPages(pages);
-            setLoading(false);
+            setLoadedPages(data[0]);
         }
-            , 1000);
+            , 500);
 
     }, []);
 
@@ -29,6 +40,7 @@ const Screen1 = () => {
         setTimeout(() => {
          const newPages=data[num];
          setPages([...pages,newPages]);
+         setLoadedPages([...pages,newPages]);
         }, 500);
       };
 
@@ -70,6 +82,7 @@ const Screen1 = () => {
                                         <Card round={x.round} scores={score_array} player1={x.team1[0].name} player2={x.team2[0].name} winner={x.winner} />
                                     </Link>
                                 })
+                                else return "";
                             })
                         }
                     </InfiniteScroll>
