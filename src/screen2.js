@@ -15,12 +15,12 @@ const Screen2 = () => {
     const forward_5=()=>{
         // const cur=ytvideo.current.getCurrentTime();
         // console.log(cur)
-        // ytvideo.current.contentWindow.postMessage(JSON.stringify({event:"command",func:"seekTo",args:[5, true]}), '*');
+        // ytvideo.current.contentWindow.postMessage(JSON.stringify({event:"command",func:"seekTo",args:[cur+5, true]}), '*');
     }
     const replay_5=()=>{
-        const x=document.querySelector('.ytp-time-current')[0].innerHTML;
-        console.log(x);
-        ytvideo.current.contentWindow.postMessage(JSON.stringify({event:"command",func:"seekTo",args:[5, true]}), '*');
+        // const x=document.querySelector('.ytp-time-current')[0].innerHTML;
+        // console.log(x);
+        // ytvideo.current.contentWindow.postMessage(JSON.stringify({event:"command",func:"seekTo",args:[cur-5, true]}), '*');
     }
     return (<>
         
@@ -32,7 +32,7 @@ const Screen2 = () => {
         <iframe 
             width="560" 
             height="315" 
-            src="https://www.youtube.com/embed/YOMgocT710E?enablejsapi=1" 
+            src="https://www.youtube.com/embed/HucIqi8Lw3E?enablejsapi=1" 
             title="YouTube video player" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen

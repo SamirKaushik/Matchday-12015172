@@ -9,7 +9,6 @@ const Screen1 = () => {
     // var url = "https://matchday.ai/referee/champ/fixture/dummy-matches?page=0"; this has been used to get all the data and stored itcin data.js file
     const [pages, setPages] = useState([]);
     const [loadedPages, setLoadedPages] = useState([]);
-    const [searchVal, setSearchVal] = useState("");
     // const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
     //getting first page using API but the API isn't working and giving CORS errors so I'm using data from file
@@ -42,32 +41,30 @@ const Screen1 = () => {
     const fetchData = async (num) => {
         setTimeout(() => {
             const newPages = data[num];
-            setPages([...pages, newPages]);
-            setLoadedPages([...pages, newPages]);
+            setPages(prev => [...prev, newPages]);
+            setLoadedPages(prev => [...prev, newPages]);
         }, 500);
     };
 
 
     // searching and filtering
     const filter = (value) => {
-        console.log(value);
         if (value === "") {
-            console.log(loadedPages)
             setPages(loadedPages);
-            console.log(pages)
         }
-        const newPages = loadedPages.map(
 
+        const newPages = loadedPages.map(
             (page) => ({
                 ...page, fixtures: page.fixtures.filter(
-                    (card) => card.team1[0].name.toLowerCase().includes(value.toLowerCase())
-                        || card.team2[0].name.toLowerCase().includes(value.toLowerCase()) || card.tournament[0].name.toLowerCase().includes(value.toLowerCase())
+                    (card) => card.team1[0].name.toLowerCase().includes(value.toLowerCase()) ||
+                        card.team2[0].name.toLowerCase().includes(value.toLowerCase()) ||
+                        card.tournament[0].name.toLowerCase().includes(value.toLowerCase())
 
                 )
             })
         );
+
         setPages(newPages);
-        console.log(loadedPages);
     }
     return (
         <>
@@ -80,8 +77,7 @@ const Screen1 = () => {
                         name="search"
                         id="search"
                         placeholder="Search for Matches"
-                        value={searchVal}
-                        onChange={e => { setSearchVal(e.target.value); filter(searchVal) }}
+                        onChange={e => { filter(e.target.value) }}
                     />
                 </div>
                 <InfiniteScroll
@@ -99,7 +95,14 @@ const Screen1 = () => {
                                     if (x.a2 !== 0) score_array.push(", " + x.a2 + "-" + x.b2);
                                     if (x.a3 !== 0) score_array.push(", " + x.a3 + "-" + x.b3);
                                     return <Link to="/screen2" key={x._id} style={{ textDecoration: 'none' }}>
-                                        <Card round={x.round} scores={score_array} player1={x.team1[0].name} player2={x.team2[0].name} winner={x.winner} tournament={x.tournament[0].name} />
+                                        <Card 
+                                            round={x.round} 
+                                            scores={score_array} 
+                                            player1={x.team1[0].name} 
+                                            player2={x.team2[0].name} 
+                                            winner={x.winner} 
+                                            tournament={x.tournament[0].name} 
+                                        />
                                     </Link>
                                 })
                             else return "";
