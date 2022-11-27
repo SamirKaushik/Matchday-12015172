@@ -14,9 +14,9 @@ const Card = ({ round, scores, player1, player2, winner }) => {
             </div>
             <div className="match_info">
                 <div className="player_1">
-                    {winner===player1?<img src={crown} alt="" srcset="" />:<div style={{padding:"8.5px 0px"}}/>}
+                    {winner===player1?<img src={crown} alt=""  />:<div style={{padding:"8.5px 0px"}}/>}
                     <div className="flag">
-                    <img src={flag} alt="" srcset="" style={{ width: "100px", height: "100px" }} />
+                    <img src={flag} alt=""  style={{ width: "100px", height: "100px" }} />
                    </div> {player1}
                 </div>
                 <div className="scores">
@@ -28,12 +28,12 @@ const Card = ({ round, scores, player1, player2, winner }) => {
                             })
                         }
                     </div>
-                    <div><img src={logo} alt="" srcset="" /></div>
+                    <div><img src={logo} alt=""  /></div>
                 </div>
                 <div className="player_2">
-                {winner===player2?<img src={crown} alt="" srcset="" />:<div style={{padding:"8.5px 0px"}}/>}
+                {winner===player2?<img src={crown} alt="" />:<div style={{padding:"8.5px 0px"}}/>}
                     <div className="flag">
-                        <img src={flag} alt="" srcset="" style={{ width: "100px", height: "100px" }} />
+                        <img src={flag} alt=""  style={{ width: "100px", height: "100px" }} />
                     </div>
                     {player2}
                 </div>
