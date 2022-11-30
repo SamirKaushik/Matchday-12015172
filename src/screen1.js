@@ -2,48 +2,37 @@ import { useState, useEffect } from "react";
 import React from 'react';
 import { Link } from "react-router-dom";
 import Card from "./card";
-import data from "./data";
+// import data from "./data";
 import './screen1.css'
 import InfiniteScroll from "react-infinite-scroll-component"
+
 const Screen1 = () => {
-    // var url = "https://matchday.ai/referee/champ/fixture/dummy-matches?page=0"; this has been used to get all the data and stored itcin data.js file
     const [pages, setPages] = useState([]);
     const [loadedPages, setLoadedPages] = useState([]);
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
-    //getting first page using API but the API isn't working and giving CORS errors so I'm using data from file
-    //I've still written the code
-    // useEffect(() => {
-    //     setLoading(true)
-    //     setError(null)
-    //     fetch("https://matchday.ai/referee/champ/fixture/dummy-matches?page=0/allow-cors", { mode: 'cors', credentials: 'include' }).then(response => {
-    //         if (response.ok)
-    //             return response.json();
-    //         throw response;
-    //     }).then(data => {
-    //         setPages([data]);
-    //         setLoading(false);
-    //     }).catch(error => { setError(error) })
-    // }, []);
 
-    //getting first page
+    //getting first page using API
     useEffect(() => {
-        setTimeout(() => {
-            setPages([data[0]]);
-            console.log(pages)
-            setLoadedPages([data[0]]);
-
-        }
-            , 500);
-
+        fetch("https://matchday.ai/referee/champ/fixture/dummy-matches?page=0")
+            .then(response => {
+                if (response.ok)
+                    return response.json();
+                throw response;
+            })
+            .then(data => {
+                setPages([data]);
+            })
+            .catch(error => { console(error) })
     }, []);
 
     const fetchData = async (num) => {
-        setTimeout(() => {
-            const newPages = data[num];
-            setPages(prev => [...prev, newPages]);
-            setLoadedPages(prev => [...prev, newPages]);
-        }, 500);
+        fetch(`https://matchday.ai/referee/champ/fixture/dummy-matches?page=${num}`).then(response => {
+            if (response.ok)
+                return response.json();
+            throw response;
+        }).then(data => {
+            setPages(prev => [...prev, data]);
+            setLoadedPages(prev => [...prev, data]);
+        }).catch(error => { console.log(error) })
     };
 
 
@@ -56,16 +45,38 @@ const Screen1 = () => {
         const newPages = loadedPages.map(
             (page) => ({
                 ...page, fixtures: page.fixtures.filter(
-                    (card) => card.team1[0].name.toLowerCase().includes(value.toLowerCase()) ||
-                        card.team2[0].name.toLowerCase().includes(value.toLowerCase()) ||
-                        card.tournament[0].name.toLowerCase().includes(value.toLowerCase())
-
+                    (card) => 
+                        card.team1[0].name.toLowerCase().includes(value.toLowerCase()) ||   //player 1 name
+                        card.team2[0].name.toLowerCase().includes(value.toLowerCase()) ||   //player 2 name
+                        card.tournament[0].name.toLowerCase().includes(value.toLowerCase()) //tournament name
                 )
             })
         );
 
         setPages(newPages);
     }
+
+    //getting first page (from hardcoded data)
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setPages([data[0]]);
+    //         console.log(pages)
+    //         setLoadedPages([data[0]]);
+
+    //     }
+    //         , 500);
+    // }, []);
+
+    // fetching further pages on scroll action (from hardcoded data)
+    // const fetchData = async (num) => {
+    //     setTimeout(() => {
+    //         const newPages = data[num];
+    //         setPages(prev => [...prev, newPages]);
+    //         setLoadedPages(prev => [...prev, newPages]);
+    //     }, 500);
+    // };
+
+
     return (
         <>
             <h1>First Screen</h1>
@@ -95,13 +106,13 @@ const Screen1 = () => {
                                     if (x.a2 !== 0) score_array.push(", " + x.a2 + "-" + x.b2);
                                     if (x.a3 !== 0) score_array.push(", " + x.a3 + "-" + x.b3);
                                     return <Link to="/screen2" key={x._id} style={{ textDecoration: 'none' }}>
-                                        <Card 
-                                            round={x.round} 
-                                            scores={score_array} 
-                                            player1={x.team1[0].name} 
-                                            player2={x.team2[0].name} 
-                                            winner={x.winner} 
-                                            tournament={x.tournament[0].name} 
+                                        <Card
+                                            round={x.round}
+                                            scores={score_array}
+                                            player1={x.team1[0].name}
+                                            player2={x.team2[0].name}
+                                            winner={x.winner}
+                                            tournament={x.tournament[0].name}
                                         />
                                     </Link>
                                 })
