@@ -13,12 +13,12 @@ const Screen2 = () => {
        setPlay(true);
     }
     const forward_5=()=>{
-        const cur=ytvideo.getCurrentTime();
+        const cur=ytvideo.current.getCurrentTime();
         ytvideo.current.seekTo(cur+5)
     }
     const replay_5=()=>{
-        const cur=ytvideo.getCurrentTime();
-        ytvideo.current.seekTo(cur-5)
+        const cur=ytvideo.current.getCurrentTime();
+        {cur-5>=0? ytvideo.current.seekTo(cur-5):ytvideo.current.seekTo(0)}
     }
     return (<>
         
