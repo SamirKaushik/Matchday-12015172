@@ -1,26 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef,useState } from 'react';
 import "./screen2.css"
+import ReactPlayer from 'react-player'
+
 const Screen2 = () => {
     const ytvideo=useRef(null);
+    const [play,setPlay]=useState(true);
+
     const pauseVideo=()=>{
-        ytvideo.current.contentWindow.postMessage(JSON.stringify({ event: 'command',
-        func: 'pauseVideo' }), '*');
-        console.log(ytvideo)
-        // console.log(ytvideo.current.contentWindow)
+        setPlay(false);
     }
     const resumeVideo=()=>{
-        ytvideo.current.contentWindow.postMessage(JSON.stringify({ event: 'command',
-        func: 'playVideo' }), '*');
+       setPlay(true);
     }
     const forward_5=()=>{
-        // const cur=ytvideo.current.getCurrentTime();
-        // console.log(cur)
-        // ytvideo.current.contentWindow.postMessage(JSON.stringify({event:"command",func:"seekTo",args:[cur+5, true]}), '*');
+        const cur=ytvideo.getCurrentTime();
+        ytvideo.current.seekTo(cur+5)
     }
     const replay_5=()=>{
-        // const x=document.querySelector('.ytp-time-current')[0].innerHTML;
-        // console.log(x);
-        // ytvideo.current.contentWindow.postMessage(JSON.stringify({event:"command",func:"seekTo",args:[cur-5, true]}), '*');
+        const cur=ytvideo.getCurrentTime();
+        ytvideo.current.seekTo(cur-5)
     }
     return (<>
         
@@ -29,16 +27,12 @@ const Screen2 = () => {
             <div>Video Analytics</div>
         </div>
         <div id="video">
-        <iframe 
-            width="560" 
-            height="315" 
-            src="https://www.youtube.com/embed/YH0UKYWvpyQ?enablejsapi=1" 
-            title="YouTube video player" 
-            frameBorder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
+        <ReactPlayer 
+            url="https://www.youtube.com/embed/YH0UKYWvpyQ" 
             ref={ytvideo}
+            playing={play}
             />
-                {/* HucIqi8Lw3E video from this id is getting blocked*/}
+                {/* HucIqi8Lw3E: video from this id is getting blocked so used a similar video*/}
         </div>
         <div id='button-control'>
         <button className='button' onClick={resumeVideo}><i className="material-symbols-outlined">play_arrow</i></button>
