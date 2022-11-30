@@ -1,8 +1,8 @@
 import React from 'react';
-import "./card.css"
+import "./card.css";
+import logo from "./res/logo_white.png";
+import crown from "./res/crown.png";
 const flag = "https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg";
-const logo = "./res/logo_white.png";
-const crown = "./res/crown.png";
 
 const Card = ({ round, scores, player1, player2, winner, tournament }) => {
     return (<>
