@@ -34,12 +34,11 @@ const Screen2 = () => {
             height="315" 
             src="https://www.youtube.com/embed/HucIqi8Lw3E?enablejsapi=1" 
             title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen
             ref={ytvideo}
-            >
+            />
                 {/* HucIqi8Lw3E */}
-        </iframe>
         </div>
         <div id='button-control'>
         <button className='button' onClick={resumeVideo}><i className="material-symbols-outlined">play_arrow</i></button>
